@@ -2,20 +2,12 @@ Weekly Builds of Balena CLI docker image, intended to be used in CI/CD operation
 
 Tags:
 
-- samibourouis/balena-cli:latest : amd64
-
-- samibourouis/balena-cli:armhf-latest  : armhf/armv7 [Discontinued]
+- abferm/balena-cli:latest
 
 Versions information :
 - alpine:3.9
 - balena-cli@11.0.6+
 
-Example CI/CD script :
+Recommended usage :
 
-    - balena version
-
-    - balena login --credentials --email $BALENA_USERNAME --password $BALENA_PASSWORD
-
-    - balena push $PROJECT_NAME --source . --registry-secrets .registry-secrets.yml
-
-Built with Gitlab CI
+    docker run --rm -e BALENA_AUTH_TOKEN -e BALENA_APP -w /work -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/work abferm/balena-cli:latest /bin/sh -c "balena login -t ${BALENA_AUTH_TOKEN} && balena deploy ${BALENA_APP} --build"
