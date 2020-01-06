@@ -16,8 +16,8 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 	nodejs-npm \
 	git \
 	openssh \
-	bash
+	bash \
+	docker
 RUN npm install balena-cli -g --production --unsafe-perm
-WORKDIR /
-COPY / .
-CMD [ "node" ]
+WORKDIR /work/
+CMD [ "balena", "help" ]
